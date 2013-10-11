@@ -19,7 +19,7 @@ class index_controller extends base_controller {
 			$this->template->content = View::instance('v_index_index');
 			
 		# Now set the <title> tag
-			$this->template->title = "Hello World";
+			$this->template->title = "Hello2 World";
 	
 		# CSS/JS includes
 			/*
@@ -32,8 +32,13 @@ class index_controller extends base_controller {
 	      					     		
 		# Render the view
 			echo $this->template;
-
+			
+	
+		
 	} # End of method
+	
+
 	
 	
 } # End of class
+?>

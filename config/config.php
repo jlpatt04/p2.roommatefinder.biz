@@ -31,7 +31,7 @@ A email designated to receive messages from the server. Examples:
 	define('SYSTEM_EMAIL', 'jen.patten@gmail.com'); 
 
 # Default DB name for this app
-	define('DB_NAME', "p2_roommatefinder_biz"); 
+	define('DB_NAME', "roommate_p2_roommatefinder_biz"); 
 
 # Timezone
 	define('TIMEZONE', 'America/New_York');

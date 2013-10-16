@@ -49,8 +49,14 @@ class users_controller extends base_controller {
         #Pass data to view
         $this->template->content->error = $error;
         
+        $client_files_head = Array('/css/login.css');
+    	
+    	$this->template->client_files_head = Utils::load_client_files($client_files_head);
+        
         #Render template
         echo $this->template;
+        
+        
     }
     
     public function p_login() {

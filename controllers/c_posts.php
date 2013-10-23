@@ -39,6 +39,7 @@ class posts_controller extends base_controller {
         echo "Your post has been added. <a href='/posts/add'>Add another</a>";
 
     }
+
     
     public function index() {
 
@@ -47,9 +48,12 @@ class posts_controller extends base_controller {
     $this->template->title   = "Posts";
 
     # Build the query
-    $q = "SELECT * 
+    $q = "SELECT 
+            posts .* , 
+            users.first_name,
+            users.last_name    
         FROM posts
-        JOIN users";
+        JOIN users ON posts.user_id = users.user_id";
 
     # Run the query
     $posts = DB::instance(DB_NAME)->select_rows($q);
@@ -60,6 +64,6 @@ class posts_controller extends base_controller {
     # Render the View
     echo $this->template;
 
-	}
+}
 }
 ?>

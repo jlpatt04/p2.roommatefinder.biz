@@ -8,10 +8,11 @@ For example there's a constant in core config set for TIME_FORMAT
 	if(!defined('TIME_FORMAT')) define('TIME_FORMAT', 'F j, Y g:ia'); 
 
 If you want a different default time format for this app, set it below
-
-	define('TIME_FORMAT', 'M j Y'); 
-
 */
+
+	define('TIME_FORMAT', 'F j, Y g:ia');
+
+
 
 # What is the name of this app?
 	define('APP_NAME', 'Micro-blog');  
@@ -35,6 +36,8 @@ A email designated to receive messages from the server. Examples:
 
 # Timezone
 	define('TIMEZONE', 'America/New_York');
+	
+
 
 # If your app is going to have outgoing emails, you should fill in your SMTP settings
 # For this you could use gmail SMTP or something like http://sendgrid.com/

@@ -1,13 +1,14 @@
+
 <?php foreach($posts as $post): ?>
 
 <article>
 
-    <h1><?=$post['first_name']?> <?=$post['last_name']?> posted:</h1>
+    <h1><?php echo $post['first_name']?> <?php echo $post['last_name']?> posted:</h1>
 
-    <p><?=$post['content']?></p>
+    <p><?php echo $post['content']?></p>
 
-    <time datetime="<?=Time::display($post['created'],'Y-m-d G:i')?>">
-        <?=Time::display($post['created'])?>
+    <time datetime="<?php echo Time::display($post['created'],'Y-m-d G:i')?>">
+        <?php echo Time::display($post['created'])?>
     </time>
 
 </article>

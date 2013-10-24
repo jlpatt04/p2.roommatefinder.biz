@@ -20,4 +20,3 @@
 
 </form>
 
-<?--Need to make username and password doesn't already exist--?>

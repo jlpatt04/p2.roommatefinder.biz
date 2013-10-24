@@ -20,6 +20,7 @@
            
             <a href='/users/profile'>Profile</a>
               <a href='/posts/add'>Post</a>
+              <a href='/posts/'>View Posts</a>
               <a href='/users/logout'>Logout</a>
 
         <!-- Menu options for users who are not logged in -->

@@ -1,5 +1,4 @@
 <?php
-
 class posts_controller extends base_controller {
 
     public function __construct() {
@@ -36,10 +35,9 @@ class posts_controller extends base_controller {
         DB::instance(DB_NAME)->insert('posts', $_POST);
 
         # Quick and dirty feedback
-        echo "Your post has been added. <a href='/posts/add'>Add another</a>";
+        echo "Your post has been added. <a href='/posts/add'>Add another</a> <a href='/posts/'>View Posts</a>";
 
     }
-
     
     public function index() {
 
@@ -48,12 +46,13 @@ class posts_controller extends base_controller {
     $this->template->title   = "Posts";
 
     # Build the query
-    $q = "SELECT 
+    $q = 'SELECT 
             posts .* , 
-            users.first_name,
-            users.last_name    
+            users.first_name, 
+            users.last_name
         FROM posts
-        JOIN users ON posts.user_id = users.user_id";
+        INNER JOIN users 
+            ON posts.user_id = users.user_id';
 
     # Run the query
     $posts = DB::instance(DB_NAME)->select_rows($q);
@@ -63,7 +62,8 @@ class posts_controller extends base_controller {
 
     # Render the View
     echo $this->template;
+    
+   
 
 }
 }
-?>

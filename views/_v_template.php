@@ -8,26 +8,40 @@
 	<!-- Controller Specific JS/CSS -->
 	<?php if(isset($client_files_head)) echo $client_files_head; ?>
 	
+	<link href="/css/images/main.css" rel="stylesheet" typ="text/css">
+	
 </head>
 
 <body>	
 
-	<a href='/'>Home</a>
+
 
         <!-- Menu for users who are logged in -->
         <?php if($user): ?>
 
+				
+<div id='cssmenu'>
+<ul>
+   <li class='active'><a href='/'><span>Home</span></a></li>
+   <li><a href='/users/profile'><span>Profile</span></a></li>
+   <li><a href='/posts/users'><span>View Users</span></a></li>
+   <li><a href='/posts/add'><span>Post</span></a></li>
+   <li class='last'><a href='/users/logout'><span>Logout</span></a></li>
+</ul>
+</div>
            
-            <a href='/users/profile'>Profile</a>
-              <a href='/posts/add'>Post</a>
-              <a href='/posts/'>View Posts</a>
-              <a href='/users/logout'>Logout</a>
+    
 
         <!-- Menu options for users who are not logged in -->
         <?php else: ?>
 
-            <a href='/users/signup'>Sign up</a>
-            <a href='/users/login'>Log in</a>
+            <div id='cssmenu'>
+<ul>
+   <li class='active'><a href='/'><span>Home</span></a></li>
+   <li><a href='/users/signup'><span>Sign Up</span></a></li>
+   <li class='last'><a href='/users/login'><span>Login</span></a></li>
+</ul>
+</div>
 
         <?php endif; ?>
 

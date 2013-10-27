@@ -25,6 +25,7 @@
    <li class='active'><a href='/'><span>Home</span></a></li>
    <li><a href='/users/profile'><span>Profile</span></a></li>
    <li><a href='/posts/users'><span>View Users</span></a></li>
+  <li><a href='/posts/index'><span>View Posts</span></a></li>
    <li><a href='/posts/add'><span>Post</span></a></li>
    <li class='last'><a href='/users/logout'><span>Logout</span></a></li>
 </ul>

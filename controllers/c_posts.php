@@ -23,6 +23,7 @@ class posts_controller extends base_controller {
 
     public function p_add() {
 
+        
         # Associate this post with this user
         $_POST['user_id']  = $this->user->user_id;
 
@@ -34,8 +35,14 @@ class posts_controller extends base_controller {
         # Note we didn't have to sanitize any of the $_POST data because we're using the insert method which does it for us
         DB::instance(DB_NAME)->insert('posts', $_POST);
 
-        # Quick and dirty feedback
-        echo "Your post has been added. <a href='/posts/add'>Add another</a> <a href='/posts/'>View Posts</a>";
+        # Setup view
+        $this->template->content = View::instance('v_posts_p_add');
+        $this->template->title   = "New Post";
+
+
+        # Render template
+        echo $this->template;
+        
 
     }
     
@@ -46,7 +53,7 @@ class posts_controller extends base_controller {
     $this->template->title   = "Posts";
 
     # Build the query
-    $q='SELECT 
+    $q= 'SELECT 
             posts.content,
             posts.created,
             posts.user_id AS post_user_id,
@@ -84,7 +91,8 @@ class posts_controller extends base_controller {
 
     # Execute the query to get all the users. 
     # Store the result array in the variable $users
-    $users = DB::instance(DB_NAME)->select_rows($q);
+    $aDBInstance =  DB::instance(DB_NAME);  
+    $users = $aDBInstance->select_rows($q);
 
     # Build the query to figure out what connections does this user already have? 
     # I.e. who are they following

@@ -35,9 +35,12 @@ class users_controller extends base_controller {
        	#Insert this user into the database
        	$user_id = DB::instance(DB_NAME)->insert('users',$_POST);
        	
-       	#For now, just confirm they've signed up
-       	#You should eventually make a proper View for this
-       	echo "You're signed up";
+       	#Setup view
+        $this->template->content = View::instance("v_users_p_signup");
+        $this->template->title = "Login";
+
+        #Render template
+       	echo $this->template;
        	
        
        
@@ -45,8 +48,8 @@ class users_controller extends base_controller {
 
     public function login($error = NULL) {
         #Setup view
-        	$this->template->content = View::instance("v_users_login");
-        	//$this->template->title = "Login";
+        $this->template->content = View::instance("v_users_login");
+        $this->template->title = "Login";
         	
         #Pass data to view
         $this->template->content->error = $error;

@@ -138,23 +138,31 @@ class users_controller extends base_controller {
     	}
     	
     	#Set up view
-    	$this ->template->content= View::instance('v_users_profile');
-    	$this->template->title = "Profile";
+        $this ->template->content= View::instance('v_users_profile');
+        $this->template->title = "Profile";
     	
-    	#Load client files
-    	$client_files_head = Array('/css/profile.css');
-    	
-    	$this->template->client_files_head = Utils::load_client_files($client_files_head);
-    	
-    	$client_files_body = Array('/js/profile.js');
-    	
-    	$this->template->client_files_body = Utils::load_client_files($client_files_body);
-    	
-    	    	
-    	#Pass the data to the view
-    	$this->template->content->user_name=$user_name;
-    	#Display the view
-    	echo $this->template;
+        $q= 'SELECT 
+            posts.content,
+            posts.created
+        FROM posts
+        WHERE user_id = '.$this->user->user_id .'
+        ORDER BY posts.created DESC';
+
+
+         # Run the query
+        $posts = DB::instance(DB_NAME)->select_rows($q);
+
+        #Pass the data to the view
+        $this->template->content->user_name=$user_name;
+        $this->template->content->posts = $posts;
+
+
+        #Display the view
+        echo $this->template;
+
+    
     }
+
+   
 
 } # end of the class

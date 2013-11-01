@@ -88,8 +88,7 @@ class posts_controller extends base_controller {
 
     # Build the query to get all the users
     $q = "SELECT *
-        FROM users
-        WHERE user_id != ".$this->user->user_id;
+        FROM users";
 
     # Execute the query to get all the users. 
     # Store the result array in the variable $users
@@ -143,5 +142,19 @@ class posts_controller extends base_controller {
     Router::redirect("/posts/users");
 
 	}
+
+    public function like($post_id) {
+
+
+    }
+
+
+
+
+
+
+
+
+
 }
 ?>

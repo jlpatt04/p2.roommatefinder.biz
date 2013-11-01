@@ -156,13 +156,47 @@ class users_controller extends base_controller {
         $this->template->content->user_name=$user_name;
         $this->template->content->posts = $posts;
 
-
         #Display the view
         echo $this->template;
-
-    
     }
 
+  /* public function upload() {
+
+    # Setup view
+        $this->template->content = View::instance('v_users_upload');
+        $this->template->title   = "Profile";
+
+        # Render template
+        echo $this->template;
+
+   }
+
+   /*public function p_upload() {
+
+    $image = Upload::upload($_FILES, "/uploads/avatars/", array("jpg", "jpeg", "gif", "png"), $this->user->user_id);
+    
    
+    $data = array("image"->$image);
+    $rows = DB::instance(DB_NAME)->update("users", $data, "WHERE user_id = ".$this->user->user_id);
+
+    $imageObj = new Image($_SERVER["DOCUMENT_ROOT"] . '/uploads/avatars/' . $image);
+    $imageObj->resize(100,100, "crop");
+    $imageObj->save_image($_SERVER["DOCUMENT_ROOT"] . '/uploads/avatars/' . $image);
+
+    /*#Setup view
+    $this->template->content = View::instance("v_users_p_upload");
+    $this->template->title = "Upload";
+
+    #Pass the data to the view
+    $this->template->content->user_name=$user_name;
+    $this->template->content->data =$rows;
+
+    #Render template
+    echo $this->template;
+    
+    
+   }*/
+
+
 
 } # end of the class

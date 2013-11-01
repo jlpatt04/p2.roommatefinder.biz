@@ -3,27 +3,46 @@
 /* Menu CSS */
 
 body {
-background-color:yellow;
+  background-color:yellow;
 }
 
 html {
-font-family: 'Capriola', sans-serif;
+  font-family: 'Capriola', sans-serif;
 }
 
 article {
-border:5px solid ;
-border-color:red green blue green;
-border-radius:10px;
-padding: 10px;
-margin-right: 600px;
+  border:5px solid ;
+  border-color:red blue red blue;
+  border-radius:7px;
+  padding: 10px;
+  margin-right: 600px;
 }
 
 h2 {
   font-size:18px;
-  font-style: italic;
   font-weight: bold;
   text-decoration: underline;
   color:blue;
+}
+
+textarea {
+  width: 200px;
+  height: 100px;
+}
+
+h3 {
+  border:10px solid ;
+  border-color: blue;
+  border-radius:20px;
+  border-width: 50px;
+  padding: 10px;
+  margin-right: 500px; 
+}
+
+img {
+  height:300px;
+  width: 400px;
+  border: 5px solid;
 }
 
 #cssmenu,

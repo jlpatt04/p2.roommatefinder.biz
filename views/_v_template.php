@@ -42,17 +42,17 @@ $(this).addClass('current');
    <li><a href='/users/logout'><span>Logout</span></a></li>
 </ul>
 </div>
-           
-    
 
+
+          
         <!-- Menu options for users who are not logged in -->
         <?php else: ?>
 
             <div id='cssmenu'>
 <ul>
-   <li class='active'><a href='/'><span>Home</span></a></li>
+   <li><a href='/'><span>Home</span></a></li>
    <li><a href='/users/signup'><span>Sign Up</span></a></li>
-   <li class='last'><a href='/users/login'><span>Login</span></a></li>
+   <li><a href='/users/login'><span>Login</span></a></li>
 </ul>
 </div>
 

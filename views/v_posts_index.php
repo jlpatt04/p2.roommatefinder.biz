@@ -10,7 +10,7 @@
     <time datetime="<?php echo Time::display($post['created'],'Y-m-d G:i')?>">
         <?php echo Time::display($post['created'])?>
     </time>
-	
+
 </article>
 
 <br/>

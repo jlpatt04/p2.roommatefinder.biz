@@ -1,8 +1,4 @@
-
-<form method='POST' action='/users/upload_file/'>
-enctype="multipart/form-data">
-<label for="file">Filename:</label>
-<input type="file" name="file" id="file"><br>
-<input type="submit" name="submit" value="Submit">
-</form>
-
+<form method='POST' enctype="multipart/form-data" action='/users/profile/'>
+		<input type='file' name='whatever-you-want'>
+		<input type='submit'>
+<form>

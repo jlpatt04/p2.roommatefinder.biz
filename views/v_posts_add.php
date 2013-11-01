@@ -4,8 +4,7 @@
     <textarea name='content' id='content'></textarea>
 
     <br><br>
-    <input type='submit' value='New post'>
+    <input type='submit' value='Post'>
     
  
 
-</form> 

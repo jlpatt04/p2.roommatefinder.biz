@@ -7,7 +7,7 @@
 
 <body>
 <?php if($user): ?>
-<img src="/css/chatting.jpg" alt="People Chatting">
+<img src="/css/chatting.jpg" alt="People Chatting" width="400px" height="300px">
 <p> What are you going to chat about today? </p>
 
 <?php else: ?>

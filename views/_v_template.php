@@ -48,7 +48,7 @@ $(this).addClass('current');
         <!-- Menu options for users who are not logged in -->
         <?php else: ?>
 
-            <div id='cssmenu'>
+<div id='cssmenu'>
 <ul>
    <li><a href='/'><span>Home</span></a></li>
    <li><a href='/users/signup'><span>Sign Up</span></a></li>

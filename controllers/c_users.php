@@ -10,40 +10,60 @@ class users_controller extends base_controller {
         echo "This is the index page";
     }
 
-    public function signup() {
+    public function signup($error = NULL) {
         
         # Setup view
             $this->template->content = View::instance('v_users_signup');
             $this->template->title   = "Sign Up";
+
+        #Pass data to the view
+            $this->template->content->error = $error;
 
         # Render template
             echo $this->template;
     }
     
     public function p_signup() {
-    
-    	 #More data we want stored with the user
-    	 $_POST['created'] = Time::now();
-    	 $_POST['modified'] = Time::now();
-    	 
-    	 #Encrypt the password
-    	$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
-    	 
-    	 #Create an encrypted token via their email address and a random string
-    	$_POST['token'] = sha1(TOKEN_SALT.$_POST['email'].Utils::generate_random_string()); 
-      	
-       	#Insert this user into the database
-       	$user_id = DB::instance(DB_NAME)->insert('users',$_POST);
-       	
+        $first_name = $_POST["first_name"];
+        $last_name = $_POST["last_name"];
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+
+        $q = "SELECT email FROM users WHERE email = '".$_POST['email']."'" ;
+
+        $emailResult = DB::instance(DB_NAME)->select_field($q);  
+
+         if(isset($emailResult)) {
+
+             Router::redirect("/users/signup/emailResult");
+         }
+
+        else if(empty($first_name) || empty($last_name) || empty($email) || empty($password)) {
+
+            Router::redirect("/users/signup/blank-field");
+        }
+
+        else {
+        #More data we want stored with the user
+            $_POST['created'] = Time::now();
+            $_POST['modified'] = Time::now();
+         
+         #Encrypt the password
+            $_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
+         
+         #Create an encrypted token via their email address and a random string
+            $_POST['token'] = sha1(TOKEN_SALT.$_POST['email'].Utils::generate_random_string());
+
+        #Insert this user into the database
+            $user_id = DB::instance(DB_NAME)->insert('users',$_POST);
+            
        	#Setup view
         $this->template->content = View::instance("v_users_p_signup");
-        $this->template->title = "Login";
-
+        $this->template->title = "Account Created";
+    
         #Render template
        	echo $this->template;
-       	
-       
-       
+       }
     }
 
     public function login($error = NULL) {
@@ -60,7 +80,6 @@ class users_controller extends base_controller {
         
         #Render template
         echo $this->template;
-        
         
         
         
@@ -104,12 +123,11 @@ class users_controller extends base_controller {
 
         # Send them to the main page - or whever you want them to go
         Router::redirect("/");
-        
-        
+    
+
+        }
 
     }
-
-}
     
     
     public function logout() {
@@ -136,31 +154,42 @@ class users_controller extends base_controller {
     	if(!$this->user) {
         Router::redirect('/users/login');
     	}
-    	
-    	#Set up view
-        $this ->template->content= View::instance('v_users_profile');
-        $this->template->title = "Profile";
-    	
-        $q= 'SELECT 
+ 
+        #Build query to select user's image
+        $q='SELECT
+            users.image
+        FROM users
+        WHERE user_id = '.$this->user->user_id;
+
+        #Run the Query
+        $data = DB::instance(DB_NAME)->select_row($q);
+
+        #Build query to get user's posts
+       $q= 'SELECT 
             posts.content,
             posts.created
         FROM posts
         WHERE user_id = '.$this->user->user_id .'
         ORDER BY posts.created DESC';
 
-
-         # Run the query
+        #Run the query
         $posts = DB::instance(DB_NAME)->select_rows($q);
+
+        #Set up view
+        $this ->template->content= View::instance('v_users_profile');
+        $this->template->title = "Profile";
 
         #Pass the data to the view
         $this->template->content->user_name=$user_name;
         $this->template->content->posts = $posts;
+        $this->template->content->data =$data;
+        #$this->template->content->imageObj =$imageObj;
 
         #Display the view
         echo $this->template;
     }
 
-  /* public function upload() {
+  public function upload() {
 
     # Setup view
         $this->template->content = View::instance('v_users_upload');
@@ -171,31 +200,24 @@ class users_controller extends base_controller {
 
    }
 
-   /*public function p_upload() {
+   public function p_upload() {
 
-    $image = Upload::upload($_FILES, "/uploads/avatars/", array("jpg", "jpeg", "gif", "png"), $this->user->user_id);
-    
+    $image = Upload::upload($_FILES, "/uploads/profile/", array("jpg", "JPG", "jpeg", "JPEG","gif", "GIF","png", "PNG"), $this->user->user_id);
    
-    $data = array("image"->$image);
-    $rows = DB::instance(DB_NAME)->update("users", $data, "WHERE user_id = ".$this->user->user_id);
+    #$imageFileName = dirname(__FILE__).'/../uploads/profile/'.$image;
 
-    $imageObj = new Image($_SERVER["DOCUMENT_ROOT"] . '/uploads/avatars/' . $image);
-    $imageObj->resize(100,100, "crop");
-    $imageObj->save_image($_SERVER["DOCUMENT_ROOT"] . '/uploads/avatars/' . $image);
+    #$imageObj = new Image($imageFileName);
+    #$imageObj->resize(150,150);
+    #$imageObj->save_image($imageFileName); 
 
-    /*#Setup view
-    $this->template->content = View::instance("v_users_p_upload");
-    $this->template->title = "Upload";
+    $data=array("image"=>$image);
+    $dbInstance = DB::instance(DB_NAME);
+    $rows = $dbInstance->update("users", $data, "WHERE user_id = ".$this->user->user_id);
 
-    #Pass the data to the view
-    $this->template->content->user_name=$user_name;
-    $this->template->content->data =$rows;
-
-    #Render template
-    echo $this->template;
+    #Send them back to the main index.
+    Router::redirect("/users/profile");
     
-    
-   }*/
+   } 
 
 
 

@@ -57,6 +57,13 @@ class Image {
         $this->image = $thumb;
     }
 
+    public function save($filename) {
+        
+        //Save the image ($his->image) to the filename provided using imagepng
+        //Lookup imagepng syntax 
+        //Return the new filename
+    }
+
 } # eoc
 
 ?>

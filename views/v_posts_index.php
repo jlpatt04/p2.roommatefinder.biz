@@ -1,4 +1,3 @@
-
 <?php foreach($posts as $post): ?>
 
 <article>
@@ -12,11 +11,12 @@
     </time>
 
 	<? if(isset($like[$post['post_id']])): ?>
-	<a href='/posts/unlike/<?=$post['post_id']?>'>unLike/a>
+	<a href='/posts/unlike/<?=$post['post_id']?>'>unLike</a>
 
 	<? else: ?>
 	<a href='/posts/like/<?=$post['post_id']?>'>Like</a>
 	<? endif; ?>
+
 
 </article>
 

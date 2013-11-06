@@ -17,6 +17,9 @@
 
 <?php endif; ?>
 
+
+<h4> +1 features- 1) Upload image 2)Like a post </h4>
+<h4> P2 Project for CSCIE-15 : Jen Patten </h4>
 </body>
 </html>
 

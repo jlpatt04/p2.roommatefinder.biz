@@ -1,10 +1,11 @@
 <?php
  $imageFileName = $data["image"];
  $imageFileName = "/uploads/profile/".$imageFileName;
- echo "<img src='".$imageFileName."' width=\"150\" height=\"150\">"; ?>
+ echo "<img src='".$imageFileName."' width=\"150\" height=\"150\">"; 
+ ?>
  
  
-<p><a href="/users/upload">Upload/Change Image</a></p>
+<p><a href="/users/upload">Upload Image</a></p>
 
 <h1><?php echo $user->first_name?>'s Posts</h1>
 

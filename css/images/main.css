@@ -1,21 +1,18 @@
 @import url(http://fonts.googleapis.com/css?family=Capriola);
-/* Let's import the lovely google font, please keep this line at the top of your stylesheet */
-/* Menu CSS */
+
+/*-------------------------------------------------------------------------------------------------
+Basic CSS
+-------------------------------------------------------------------------------------------------*/
+html {
+  font-family: 'Capriola', sans-serif;
+}
 
 body {
   background-color:yellow;
 }
 
-html {
-  font-family: 'Capriola', sans-serif;
-}
-
-article {
-  border:5px solid ;
-  border-color:red blue red blue;
-  border-radius:7px;
-  padding: 10px;
-  margin-right: 600px;
+h1 {
+  font-size: 22px;
 }
 
 h2 {
@@ -23,11 +20,6 @@ h2 {
   font-weight: bold;
   text-decoration: underline;
   color:blue;
-}
-
-textarea {
-  width: 200px;
-  height: 100px;
 }
 
 h3 {
@@ -43,10 +35,26 @@ h4 {
   font-size: 10px;
 }
 
+article {
+  border:5px solid ;
+  border-color:red blue red blue;
+  border-radius:7px;
+  padding: 10px;
+  margin-right: 600px;
+}
+
+textarea {
+  width: 200px;
+  height: 100px;
+}
+
 img {
   border:6px solid;
 }
 
+/*-------------------------------------------------------------------------------------------------
+CSS for Navigation Menu
+-------------------------------------------------------------------------------------------------*/
 #cssmenu,
 #cssmenu ul,
 #cssmenu ul li,
@@ -126,4 +134,12 @@ a.current {
   color: #004f7c;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.55);
   opacity: 1;
+}
+
+/*-------------------------------------------------------------------------------------------------
+CSS for Form Errors
+-------------------------------------------------------------------------------------------------*/
+.error {
+color:red;
+font-size: 14px;
 }

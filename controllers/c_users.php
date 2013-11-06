@@ -18,6 +18,12 @@ class users_controller extends base_controller {
         #Pass data to the view
         $this->template->content->error = $error;
 
+        #CSS file for Login
+        $client_files_head = Array('/css/images/main.css');
+
+        #Pass the date to the view
+        $this->template->client_files_head = Utils::load_client_files($client_files_head);
+        
         # Render template
         echo $this->template;
     }
@@ -36,7 +42,7 @@ class users_controller extends base_controller {
 
         $emailResult = DB::instance(DB_NAME)->select_field($q);  
 
-         if(isset($emailResult)) {
+        if(isset($emailResult)) {
 
              Router::redirect("/users/signup/emailResult");
          }
@@ -45,7 +51,6 @@ class users_controller extends base_controller {
 
             Router::redirect("/users/signup/blank-field");
         }
-
         else {
         #More data we want stored with the user
         $_POST['created'] = Time::now();
@@ -60,12 +65,12 @@ class users_controller extends base_controller {
         #Insert this user into the database
         $user_id = DB::instance(DB_NAME)->insert('users',$_POST);
             
-               #Setup view
+        #Setup view
         $this->template->content = View::instance("v_users_p_signup");
         $this->template->title = "Account Created";
     
         #Render template
-               echo $this->template;
+        echo $this->template;
        }
     }
 
@@ -79,9 +84,9 @@ class users_controller extends base_controller {
         $this->template->content->error = $error;
         
         #CSS file for Login
-        $client_files_head = Array('/css/login.css');
+        $client_files_head = Array('/css/images/main.css');
 
-            #Pass the date to the view
+        #Pass the date to the view
         $this->template->client_files_head = Utils::load_client_files($client_files_head);
         
         #Render template

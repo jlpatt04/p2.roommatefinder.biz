@@ -171,8 +171,15 @@ class posts_controller extends base_controller {
     }
 
 
-    public function unlike($post_id_followed) {
+    public function unlike($post_id_liked) {
         
+        #Delete this connection
+        $where_condition = 'WHERE user_id = '.$this->user->user_id.' AND post_id_liked = '.$post_id_liked;
+        DB::instance(DB_NAME)->delete('like_posts', $where_condition);
+
+        #Send them back
+        Router::redirect("/posts/index");
+
 
     }
 

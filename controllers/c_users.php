@@ -24,6 +24,10 @@ class users_controller extends base_controller {
     }
     
     public function p_signup() {
+
+        # Sanitize the user entered data to prevent any funny-business (re: SQL Injection Attacks)
+        $_POST = DB::instance(DB_NAME)->sanitize($_POST);
+
         $first_name = $_POST["first_name"];
         $last_name = $_POST["last_name"];
         $email = $_POST["email"];
@@ -67,6 +71,7 @@ class users_controller extends base_controller {
     }
 
     public function login($error = NULL) {
+
         #Setup view
         $this->template->content = View::instance("v_users_login");
         $this->template->title = "Login";
@@ -183,7 +188,6 @@ class users_controller extends base_controller {
         $this->template->content->user_name=$user_name;
         $this->template->content->posts = $posts;
         $this->template->content->data =$data;
-        #$this->template->content->imageObj =$imageObj;
 
         #Display the view
         echo $this->template;
@@ -202,13 +206,16 @@ class users_controller extends base_controller {
 
    public function p_upload() {
 
+    #Save image as a string and update row in the database
     $image = Upload::upload($_FILES, "/uploads/profile/", array("jpg", "JPG", "jpeg", "JPEG","gif", "GIF","png", "PNG"), $this->user->user_id);
    
-    #$imageFileName = dirname(__FILE__).'/../uploads/profile/'.$image;
-
-    #$imageObj = new Image($imageFileName);
-    #$imageObj->resize(150,150);
-    #$imageObj->save_image($imageFileName); 
+    $imageFileName = dirname(__FILE__).'/../uploads/profile/'.$image;
+    $imageObj = new Image($imageFileName);
+    
+    #If image is large(2MB) resize will rotate the image
+    $imageObj->resize(150,150, "crop");
+    $imageObj->save_image($imageFileName); 
+    
 
     $data=array("image"=>$image);
     $dbInstance = DB::instance(DB_NAME);

@@ -219,7 +219,7 @@ class users_controller extends base_controller {
         
         //echo "<BR> $imageFileName:". $imageFileName;
 
-        try{
+        /*try{
         $imageObj = new Image($imageFileName);
 
         echo "<BR> $imageObj:"; var_dump($imageObj);
@@ -235,7 +235,7 @@ class users_controller extends base_controller {
 
         }catch(Exception $e){
             
-        }
+        } */
 
         $data=array("image"=>$image);
         $dbInstance = DB::instance(DB_NAME);

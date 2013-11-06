@@ -217,7 +217,7 @@
             $imageFileName = dirname(__FILE__).'/../uploads/profile/'.$image;
             
             /*
-            The image class is not working when I upload it to the live server.
+            #The image class is not working when I upload it to the live server.
             $imageObj = new Image($imageFileName);
             $imageObj->resize(150,150, "crop");
             $imageObj->save_image($imageFileName); 

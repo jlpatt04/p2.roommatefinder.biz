@@ -210,27 +210,41 @@
 
        public function p_upload() {
 
-            #Save image as a string and update row in the database
-            $image = Upload::upload($_FILES, "/uploads/profile/", array("jpg", "JPG", "jpeg", "JPEG","gif", "GIF","png", "PNG"), $this->user->user_id);
-            
-            
-            $imageFileName = dirname(__FILE__).'/../uploads/profile/'.$image;
-            
-            /*
-            #The image class is not working when I upload it to the live server.
-            $imageObj = new Image($imageFileName);
-            $imageObj->resize(150,150, "crop");
-            $imageObj->save_image($imageFileName); 
-            */
-
-            $data=array("image"=>$image);
-            $dbInstance = DB::instance(DB_NAME);
-            $rows = $dbInstance->update("users", $data, "WHERE user_id = ".$this->user->user_id);
-
-            #Send them back to the main index.
-            Router::redirect("/users/profile");
+        #Save image as a string and update row in the database
+        $image = Upload::upload($_FILES, "/uploads/profile/", array("jpg", "JPG", "jpeg", "JPEG","gif", "GIF","png", "PNG"), $this->user->user_id);
         
-       } 
+        
+        $imageFileName = dirname(__FILE__).'/../uploads/profile/'.$image;
+        
+        /*
+        try{
+        $imageObj = new Image($imageFileName);
+
+        echo "<BR> $imageObj:"; var_dump($imageObj);
+
+        #If image is large(2MB) resize will rotate the image
+        $imageObj->resize(150,150, "crop");
+
+        echo "<BR> resize succeeded";
+
+        $imageObj->save_image($imageFileName); 
+    
+        echo "<BR> Save succeeded";
+
+        }catch(Exception $e){
+
+        }
+        */
+
+        $data=array("image"=>$image);
+        $dbInstance = DB::instance(DB_NAME);
+        $rows = $dbInstance->update("users", $data, "WHERE user_id = ".$this->user->user_id);
+
+        #Send them back to the main index.
+        Router::redirect("/users/profile");
+    
+   } 
+
 
 
 

@@ -213,12 +213,13 @@ class users_controller extends base_controller {
         #Save image as a string and update row in the database
         $image = Upload::upload($_FILES, "/uploads/profile/", array("jpg", "JPG", "jpeg", "JPEG","gif", "GIF","png", "PNG"), $this->user->user_id);
         
-        echo "<BR> $image:". $image;
+        //echo "<BR> $image:". $image;
 
         $imageFileName = dirname(__FILE__).'/../uploads/profile/'.$image;
         
-        echo "<BR> $imageFileName:". $imageFileName;
+        //echo "<BR> $imageFileName:". $imageFileName;
 
+        try{
         $imageObj = new Image($imageFileName);
 
         echo "<BR> $imageObj:"; var_dump($imageObj);
@@ -231,6 +232,10 @@ class users_controller extends base_controller {
         $imageObj->save_image($imageFileName); 
     
         echo "<BR> Save succeeded";
+
+        }catch(Exception $e){
+            
+        }
 
         $data=array("image"=>$image);
         $dbInstance = DB::instance(DB_NAME);

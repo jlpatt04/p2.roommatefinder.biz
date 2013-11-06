@@ -12,6 +12,7 @@
 
      <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 
+<!-- This JS script highlights the navigation bar for the current page -->
 <script>
   $(function(){
     $('a').each(function() {
@@ -25,6 +26,7 @@
 	
 </head>
 <body>	
+
     <!-- Menu for users who are logged in -->
     <?php if($user): ?>
 

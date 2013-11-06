@@ -180,9 +180,7 @@ class posts_controller extends base_controller {
         #Send them back
         Router::redirect("/posts/index");
 
-
     }
-
 
 }
 ?>

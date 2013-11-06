@@ -3,7 +3,6 @@ class users_controller extends base_controller {
 
     public function __construct() {
         parent::__construct();
-        
     } 
 
     public function index() {
@@ -13,14 +12,14 @@ class users_controller extends base_controller {
     public function signup($error = NULL) {
         
         # Setup view
-            $this->template->content = View::instance('v_users_signup');
-            $this->template->title   = "Sign Up";
+        $this->template->content = View::instance('v_users_signup');
+        $this->template->title   = "Sign Up";
 
         #Pass data to the view
-            $this->template->content->error = $error;
+        $this->template->content->error = $error;
 
         # Render template
-            echo $this->template;
+        echo $this->template;
     }
     
     public function p_signup() {
@@ -49,17 +48,17 @@ class users_controller extends base_controller {
 
         else {
         #More data we want stored with the user
-            $_POST['created'] = Time::now();
-            $_POST['modified'] = Time::now();
+        $_POST['created'] = Time::now();
+        $_POST['modified'] = Time::now();
          
          #Encrypt the password
-            $_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
+        $_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
          
          #Create an encrypted token via their email address and a random string
-            $_POST['token'] = sha1(TOKEN_SALT.$_POST['email'].Utils::generate_random_string());
+        $_POST['token'] = sha1(TOKEN_SALT.$_POST['email'].Utils::generate_random_string());
 
         #Insert this user into the database
-            $user_id = DB::instance(DB_NAME)->insert('users',$_POST);
+        $user_id = DB::instance(DB_NAME)->insert('users',$_POST);
             
                #Setup view
         $this->template->content = View::instance("v_users_p_signup");
@@ -87,8 +86,6 @@ class users_controller extends base_controller {
         
         #Render template
         echo $this->template;
-        
-        
         
     }
     
@@ -130,7 +127,6 @@ class users_controller extends base_controller {
 
         # Send them to the main page - or whever you want them to go
         Router::redirect("/");
-    
 
         }
 
@@ -158,10 +154,10 @@ class users_controller extends base_controller {
 
     public function profile($user_name = NULL) {
     
-            # If user is blank, they're not logged in; redirect them to the login page
-            if(!$this->user) {
+        # If user is blank, they're not logged in; redirect them to the login page
+        if(!$this->user) {
         Router::redirect('/users/login');
-            }
+        }
  
         #Build query to select user's image
         $q='SELECT
@@ -212,13 +208,11 @@ class users_controller extends base_controller {
 
         #Save image as a string and update row in the database
         $image = Upload::upload($_FILES, "/uploads/profile/", array("jpg", "JPG", "jpeg", "JPEG","gif", "GIF","png", "PNG"), $this->user->user_id);
-        
-        //echo "<BR> $image:". $image;
 
         $imageFileName = dirname(__FILE__).'/../uploads/profile/'.$image;
-        
-        //echo "<BR> $imageFileName:". $imageFileName;
 
+        #Image class not working on live server
+        #Was able to resize image using img src on profile view
         /*try{
         $imageObj = new Image($imageFileName);
 
